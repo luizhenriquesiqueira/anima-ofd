@@ -150,6 +150,38 @@
   @keyframes drift    { 0% { opacity: 0; transform: translateY(-140px); } 20% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(820px); } }
   @keyframes condense { 0% { opacity: 0; } 30% { opacity: .35; } 100% { opacity: 1; transform: translateY(0) scale(1, 1); } }
 
+
+  /* =================================================================
+     CAMADA CINEMATOGRÁFICA (mesma linguagem do cockpit):
+     câmera em dolly-in, tremor no travamento, clarão anamórfico,
+     explosão de luz, onda de choque e linha de leitura no nome
+     ================================================================= */
+  .cam { transform-box: view-box; transform-origin: 195px 343px; }
+  .s2 .cam { animation: dolly2 2.9s var(--ease-out-soft) forwards; }
+  .s3 .cam { animation: dolly3 2.6s var(--ease-out-soft) forwards; }
+  .s2 .shk { transform-box: view-box; animation: shake .34s linear 1.62s; }
+  .s3 .shk { transform-box: view-box; animation: shake .34s linear 1.18s; }
+  .cflare { transform-box: fill-box; transform-origin: center; opacity: 0; transform: scaleX(.25); }
+  .cburst { transform-box: fill-box; transform-origin: center; opacity: 0; transform: scale(.3); }
+  .s2 .cflare { animation: flare .8s var(--ease-out-soft) 1.62s forwards; }
+  .s2 .cburst { animation: burst .65s var(--ease-out-soft) 1.62s forwards; }
+  .s3 .cflare { animation: flare .8s var(--ease-out-soft) 1.18s forwards; }
+  .s3 .cburst { animation: burst .65s var(--ease-out-soft) 1.18s forwards; }
+  .cring { transform-box: fill-box; transform-origin: center; opacity: 0; animation: ring .9s var(--ease-out-soft) 1.15s forwards; }
+  .streak { transform-box: view-box; opacity: 0; animation: streak .5s cubic-bezier(.55,0,.85,.4) forwards; animation-delay: var(--d); }
+  .cscan { transform-box: view-box; opacity: 0; }
+  .s2 .cscan { animation: scan .55s var(--ease-in-out) 1.98s forwards; }
+  .s3 .cscan { animation: scan .55s var(--ease-in-out) 1.92s forwards; }
+  .vig { pointer-events: none; }
+  @keyframes dolly2 { from { transform: scale(1.28) rotate(-3deg) translateY(18px); } to { transform: scale(1) rotate(0) translateY(0); } }
+  @keyframes dolly3 { from { transform: scale(1.22) translateY(70px); } to { transform: scale(1) translateY(0); } }
+  @keyframes shake {
+    0% { transform: translate(0,0); } 20% { transform: translate(1.8px,-1.3px); } 40% { transform: translate(-1.5px,1.1px); }
+    60% { transform: translate(1px,.7px); } 80% { transform: translate(-.6px,-.4px); } 100% { transform: translate(0,0); } }
+  @keyframes flare { 0% { opacity: 0; transform: scaleX(.25); } 18% { opacity: 1; } 100% { opacity: 0; transform: scaleX(1.5); } }
+  @keyframes burst { 0% { opacity: 0; transform: scale(.3); } 20% { opacity: .9; } 100% { opacity: 0; transform: scale(1.7); } }
+  @keyframes ring  { 0% { opacity: 0; transform: scale(.2); } 15% { opacity: .9; } 100% { opacity: 0; transform: scale(2.6); } }
+  @keyframes streak { 0% { opacity: 0; transform: translateY(-60px) scaleY(.3); } 30% { opacity: .9; } 100% { opacity: 0; transform: translateY(820px) scaleY(1.6); } }
   /* ---------- Comuns ---------- */
   @keyframes appear { to { opacity: 1; } }
   @keyframes vanish { to { opacity: 0; } }
@@ -236,177 +268,18 @@
     </defs>
   </svg>
 
-  <!-- ========================= CENA 1 ========================= -->
-  <svg class="scene s1 active" viewBox="0 0 390 780" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Flight Director — Suporte à Aviação Executiva">
-    <circle class="glow fx" cx="195" cy="343" r="110" fill="url(#glowGradient)" />
-
-    <!-- Visor HUD -->
-    <g class="hud fx" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="1" font-size="8" font-family="ui-monospace, Menlo, monospace">
-      <!-- fitas laterais de velocidade e altitude -->
-      <g class="tape">
-        <line x1="35" y1="150" x2="44" y2="150" />
-        <text x="14" y="153" fill="#FFFFFF" stroke="none" fill-opacity=".55">260</text>
-        <line x1="39" y1="162" x2="44" y2="162" />
-        <line x1="39" y1="174" x2="44" y2="174" />
-        <line x1="39" y1="186" x2="44" y2="186" />
-        <line x1="35" y1="198" x2="44" y2="198" />
-        <text x="14" y="201" fill="#FFFFFF" stroke="none" fill-opacity=".55">240</text>
-        <line x1="39" y1="210" x2="44" y2="210" />
-        <line x1="39" y1="222" x2="44" y2="222" />
-        <line x1="39" y1="234" x2="44" y2="234" />
-        <line x1="35" y1="246" x2="44" y2="246" />
-        <text x="14" y="249" fill="#FFFFFF" stroke="none" fill-opacity=".55">220</text>
-        <line x1="39" y1="258" x2="44" y2="258" />
-        <line x1="39" y1="270" x2="44" y2="270" />
-        <line x1="39" y1="282" x2="44" y2="282" />
-        <line x1="35" y1="294" x2="44" y2="294" />
-        <text x="14" y="297" fill="#FFFFFF" stroke="none" fill-opacity=".55">200</text>
-        <line x1="39" y1="306" x2="44" y2="306" />
-        <line x1="39" y1="318" x2="44" y2="318" />
-        <line x1="39" y1="330" x2="44" y2="330" />
-        <line x1="35" y1="342" x2="44" y2="342" />
-        <text x="14" y="345" fill="#FFFFFF" stroke="none" fill-opacity=".55">180</text>
-        <line x1="39" y1="354" x2="44" y2="354" />
-        <line x1="39" y1="366" x2="44" y2="366" />
-        <line x1="39" y1="378" x2="44" y2="378" />
-        <line x1="35" y1="390" x2="44" y2="390" />
-        <text x="14" y="393" fill="#FFFFFF" stroke="none" fill-opacity=".55">160</text>
-        <line x1="39" y1="402" x2="44" y2="402" />
-        <line x1="39" y1="414" x2="44" y2="414" />
-        <line x1="39" y1="426" x2="44" y2="426" />
-        <line x1="35" y1="438" x2="44" y2="438" />
-        <text x="14" y="441" fill="#FFFFFF" stroke="none" fill-opacity=".55">140</text>
-        <line x1="39" y1="450" x2="44" y2="450" />
-        <line x1="39" y1="462" x2="44" y2="462" />
-        <line x1="39" y1="474" x2="44" y2="474" />
-        <line x1="35" y1="486" x2="44" y2="486" />
-        <text x="14" y="489" fill="#FFFFFF" stroke="none" fill-opacity=".55">120</text>
-        <line x1="39" y1="498" x2="44" y2="498" />
-        <line x1="39" y1="510" x2="44" y2="510" />
-        <line x1="39" y1="522" x2="44" y2="522" />
-        <line x1="35" y1="534" x2="44" y2="534" />
-        <text x="14" y="537" fill="#FFFFFF" stroke="none" fill-opacity=".55">100</text>
-        <line x1="39" y1="546" x2="44" y2="546" />
-        <line x1="39" y1="558" x2="44" y2="558" />
-        <line x1="39" y1="570" x2="44" y2="570" />
-        <line x1="35" y1="582" x2="44" y2="582" />
-        <text x="14" y="585" fill="#FFFFFF" stroke="none" fill-opacity=".55">80</text>
-        <line x1="39" y1="594" x2="44" y2="594" />
-      </g>
-      <g class="tape">
-        <line x1="346" y1="150" x2="355" y2="150" />
-        <text x="358" y="153" fill="#FFFFFF" stroke="none" fill-opacity=".55">9000</text>
-        <line x1="346" y1="162" x2="351" y2="162" />
-        <line x1="346" y1="174" x2="351" y2="174" />
-        <line x1="346" y1="186" x2="351" y2="186" />
-        <line x1="346" y1="198" x2="355" y2="198" />
-        <text x="358" y="201" fill="#FFFFFF" stroke="none" fill-opacity=".55">8000</text>
-        <line x1="346" y1="210" x2="351" y2="210" />
-        <line x1="346" y1="222" x2="351" y2="222" />
-        <line x1="346" y1="234" x2="351" y2="234" />
-        <line x1="346" y1="246" x2="355" y2="246" />
-        <text x="358" y="249" fill="#FFFFFF" stroke="none" fill-opacity=".55">7000</text>
-        <line x1="346" y1="258" x2="351" y2="258" />
-        <line x1="346" y1="270" x2="351" y2="270" />
-        <line x1="346" y1="282" x2="351" y2="282" />
-        <line x1="346" y1="294" x2="355" y2="294" />
-        <text x="358" y="297" fill="#FFFFFF" stroke="none" fill-opacity=".55">6000</text>
-        <line x1="346" y1="306" x2="351" y2="306" />
-        <line x1="346" y1="318" x2="351" y2="318" />
-        <line x1="346" y1="330" x2="351" y2="330" />
-        <line x1="346" y1="342" x2="355" y2="342" />
-        <text x="358" y="345" fill="#FFFFFF" stroke="none" fill-opacity=".55">5000</text>
-        <line x1="346" y1="354" x2="351" y2="354" />
-        <line x1="346" y1="366" x2="351" y2="366" />
-        <line x1="346" y1="378" x2="351" y2="378" />
-        <line x1="346" y1="390" x2="355" y2="390" />
-        <text x="358" y="393" fill="#FFFFFF" stroke="none" fill-opacity=".55">4000</text>
-        <line x1="346" y1="402" x2="351" y2="402" />
-        <line x1="346" y1="414" x2="351" y2="414" />
-        <line x1="346" y1="426" x2="351" y2="426" />
-        <line x1="346" y1="438" x2="355" y2="438" />
-        <text x="358" y="441" fill="#FFFFFF" stroke="none" fill-opacity=".55">3000</text>
-        <line x1="346" y1="450" x2="351" y2="450" />
-        <line x1="346" y1="462" x2="351" y2="462" />
-        <line x1="346" y1="474" x2="351" y2="474" />
-        <line x1="346" y1="486" x2="355" y2="486" />
-        <text x="358" y="489" fill="#FFFFFF" stroke="none" fill-opacity=".55">2000</text>
-        <line x1="346" y1="498" x2="351" y2="498" />
-        <line x1="346" y1="510" x2="351" y2="510" />
-        <line x1="346" y1="522" x2="351" y2="522" />
-        <line x1="346" y1="534" x2="355" y2="534" />
-        <text x="358" y="537" fill="#FFFFFF" stroke="none" fill-opacity=".55">1000</text>
-        <line x1="346" y1="546" x2="351" y2="546" />
-        <line x1="346" y1="558" x2="351" y2="558" />
-        <line x1="346" y1="570" x2="351" y2="570" />
-        <line x1="346" y1="582" x2="355" y2="582" />
-        <text x="358" y="585" fill="#FFFFFF" stroke="none" fill-opacity=".55">0</text>
-        <line x1="346" y1="594" x2="351" y2="594" />
-      </g>
-      <line x1="44" y1="200" x2="44" y2="490" />
-      <line x1="346" y1="200" x2="346" y2="490" />
-      <text x="34" y="190" fill="#FFC300" stroke="none" fill-opacity=".85">SPD</text>
-      <text x="334" y="190" fill="#FFC300" stroke="none" fill-opacity=".85">ALT</text>
-      <text x="171" y="186" fill="#FFFFFF" stroke="none" fill-opacity=".6">HDG 360</text>
-    </g>
-
-    <g class="ladder fx" stroke-linecap="round">
-      <!-- linha do horizonte (amarela) que se abre nas asas -->
-      <g class="horizon" stroke="#FFC300" stroke-width="1.3">
-        <line x1="-60" y1="343.2" x2="176" y2="343.2" />
-        <line x1="214" y1="343.2" x2="450" y2="343.2" />
-      </g>
-      <!-- degraus extras da escada de arfagem -->
-      <g class="hud" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="1" fill="#FFFFFF" font-size="8" font-family="ui-monospace, Menlo, monospace">
-        <path d="M137 260H175M215 260H253M137 260v5M253 260v5" fill="none" />
-        <path d="M137 426H175M215 426H253M137 426v-5M253 426v-5" fill="none" stroke-dasharray="4 3" />
-        <text x="118" y="263" stroke="none">10</text><text x="259" y="263" stroke="none">10</text>
-        <text x="114" y="429" stroke="none">-10</text><text x="259" y="429" stroke="none">-10</text>
-      </g>
-      <!-- degraus que travam exatamente nas barras do logo -->
-      <g stroke="#FFFFFF" stroke-width="1.3" fill="none">
-        <path class="lockline" d="M150.9 304.05H239" />
-        <path class="lockline" d="M168.7 320.95H221.2" />
-        <path class="lockline" d="M168.7 365.7H221.2" />
-        <path class="lockline" d="M150.9 382.75H239" />
-      </g>
-      <!-- marcador de trajetória de voo -->
-      <g class="fpm" stroke="#FFFFFF" stroke-width="1.4" fill="none">
-        <circle cx="195" cy="343.2" r="5" /><path d="M182 343.2h8M200 343.2h8M195 338.2v-6" />
-      </g>
-    </g>
-
-    <g transform="translate(45 300) scale(.372)">
-      <g transform="translate(253.3 0) scale(1.919) translate(0 -1.4)">
-        <use class="part bar" href="#barOT" /><use class="part bar" href="#barIT" />
-        <use class="part bar" href="#barIB" /><use class="part bar" href="#barOB" />
-        <use class="part wingL" href="#wingL" /><use class="part wingR" href="#wingR" />
-        <use class="part jet" href="#jet" />
-        <use class="fx" href="#shineFx" />
-      </g>
-      <g transform="translate(-199.9 309.8)">
-        <use class="glyph" style="--i:0" href="#g0" />
-        <use class="glyph" style="--i:1" href="#g1" />
-        <use class="glyph" style="--i:2" href="#g2" />
-        <use class="glyph" style="--i:3" href="#g3" />
-        <use class="glyph" style="--i:4" href="#g4" />
-        <use class="glyph" style="--i:5" href="#g5" />
-        <use class="glyph" style="--i:6" href="#g6" />
-        <use class="glyph" style="--i:7" href="#g7" />
-        <use class="glyph" style="--i:8" href="#g8" />
-        <use class="glyph" style="--i:9" href="#g9" />
-        <use class="glyph" style="--i:10" href="#g10" />
-        <use class="glyph" style="--i:11" href="#g11" />
-        <use class="glyph" style="--i:12" href="#g12" />
-        <use class="glyph" style="--i:13" href="#g13" />
-      </g>
-      <image class="tag" href="data:image/png;base64,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" x="104.7" y="393.6" width="596.6" height="41.9" preserveAspectRatio="none" />
-    </g>
-    <line class="scan fx" x1="45" y1="442" x2="62" y2="442" stroke="#FFC300" stroke-width="1.6" stroke-linecap="round" />
-  </svg>
+  <!-- ========================= CENA 1: versão cinematográfica aprovada (splash-cockpit.html) ========================= -->
+  <iframe class="scene s1 active" id="s1frame" src="splash-cockpit.html" title="Cockpit" style="border:0;background:transparent"></iframe>
 
   <!-- ========================= CENA 2 ========================= -->
   <svg class="scene s2" viewBox="0 0 390 780" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Flight Director — Suporte à Aviação Executiva">
+    <defs>
+      <linearGradient id="cFlare" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFC300" stop-opacity="0"/><stop offset=".35" stop-color="#FFC300" stop-opacity=".55"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity="1"/><stop offset=".65" stop-color="#FFC300" stop-opacity=".55"/><stop offset="1" stop-color="#FFC300" stop-opacity="0"/></linearGradient>
+      <radialGradient id="cBurst"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset=".25" stop-color="#FFE38A" stop-opacity=".5"/><stop offset="1" stop-color="#FFC300" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cVig" cx="50%" cy="45%" r="75%"><stop offset=".55" stop-color="#00001A" stop-opacity="0"/><stop offset="1" stop-color="#00001A" stop-opacity=".7"/></radialGradient>
+    </defs>
+    <g class="cam"><g class="shk">
+      <g class="fx"><rect class="streak" x="60" y="0" width="1.4" height="70" fill="#FFC300" fill-opacity=".45" style="--d:0.20s"/><rect class="streak" x="330" y="0" width="1.4" height="70" fill="#FFC300" fill-opacity=".45" style="--d:0.35s"/><rect class="streak" x="90" y="0" width="1.4" height="70" fill="#FFC300" fill-opacity=".45" style="--d:0.60s"/><rect class="streak" x="300" y="0" width="1.4" height="70" fill="#FFC300" fill-opacity=".45" style="--d:0.75s"/><rect class="streak" x="40" y="0" width="1.4" height="70" fill="#FFC300" fill-opacity=".45" style="--d:0.95s"/><rect class="streak" x="350" y="0" width="1.4" height="70" fill="#FFC300" fill-opacity=".45" style="--d:1.10s"/></g>
     <circle class="glow fx" cx="195" cy="343" r="110" fill="url(#glowGradient)" />
     <!-- bordas da pista convergindo para o horizonte -->
     <g class="edges fx" stroke="#FFFFFF" stroke-opacity=".22" stroke-width="1">
@@ -456,10 +329,23 @@
     <circle class="bloom fx" cx="141" cy="342" r="26" fill="url(#bloomGradient)" />
     <circle class="bloom fx" cx="249" cy="342" r="26" fill="url(#bloomGradient)" />
     <line class="horizonline fx" x1="40" y1="428" x2="350" y2="428" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="1" />
+  
+      <ellipse class="cburst fx" cx="195" cy="343" rx="70" ry="70" fill="url(#cBurst)" />
+      <rect class="cflare fx" x="15" y="340" width="360" height="6" rx="3" fill="url(#cFlare)" />
+      <line class="cscan fx" x1="45" y1="442" x2="62" y2="442" stroke="#FFC300" stroke-width="1.6" stroke-linecap="round" />
+    </g></g>
+    <rect class="vig fx" x="-200" y="-200" width="790" height="1180" fill="url(#cVig)" />
   </svg>
 
   <!-- ========================= CENA 3 ========================= -->
   <svg class="scene s3" viewBox="0 0 390 780" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Flight Director — Suporte à Aviação Executiva">
+    <defs>
+      <linearGradient id="cFlare" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFC300" stop-opacity="0"/><stop offset=".35" stop-color="#FFC300" stop-opacity=".55"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity="1"/><stop offset=".65" stop-color="#FFC300" stop-opacity=".55"/><stop offset="1" stop-color="#FFC300" stop-opacity="0"/></linearGradient>
+      <radialGradient id="cBurst"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset=".25" stop-color="#FFE38A" stop-opacity=".5"/><stop offset="1" stop-color="#FFC300" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cVig" cx="50%" cy="45%" r="75%"><stop offset=".55" stop-color="#00001A" stop-opacity="0"/><stop offset="1" stop-color="#00001A" stop-opacity=".7"/></radialGradient>
+    </defs>
+    <g class="cam"><g class="shk">
+      <g class="fx"><rect class="streak" x="175" y="0" width="1.2" height="49" fill="#FFFFFF" fill-opacity=".35" style="--d:0.36s"/><rect class="streak" x="34" y="0" width="1.2" height="44" fill="#FFFFFF" fill-opacity=".35" style="--d:0.74s"/><rect class="streak" x="58" y="0" width="1.2" height="63" fill="#FFFFFF" fill-opacity=".35" style="--d:0.52s"/><rect class="streak" x="269" y="0" width="1.2" height="53" fill="#FFFFFF" fill-opacity=".35" style="--d:0.03s"/><rect class="streak" x="232" y="0" width="1.2" height="66" fill="#FFFFFF" fill-opacity=".35" style="--d:0.06s"/><rect class="streak" x="56" y="0" width="1.2" height="75" fill="#FFFFFF" fill-opacity=".35" style="--d:0.38s"/><rect class="streak" x="299" y="0" width="1.2" height="47" fill="#FFFFFF" fill-opacity=".35" style="--d:0.85s"/><rect class="streak" x="332" y="0" width="1.2" height="80" fill="#FFFFFF" fill-opacity=".35" style="--d:0.52s"/><rect class="streak" x="41" y="0" width="1.2" height="76" fill="#FFFFFF" fill-opacity=".35" style="--d:0.53s"/><rect class="streak" x="35" y="0" width="1.2" height="54" fill="#FFFFFF" fill-opacity=".35" style="--d:0.04s"/><rect class="streak" x="78" y="0" width="1.2" height="58" fill="#FFFFFF" fill-opacity=".35" style="--d:0.38s"/><rect class="streak" x="286" y="0" width="1.2" height="47" fill="#FFFFFF" fill-opacity=".35" style="--d:0.51s"/><rect class="streak" x="296" y="0" width="1.2" height="83" fill="#FFFFFF" fill-opacity=".35" style="--d:0.16s"/><rect class="streak" x="307" y="0" width="1.2" height="76" fill="#FFFFFF" fill-opacity=".35" style="--d:0.58s"/></g>
     <circle class="glow fx" cx="195" cy="343" r="110" fill="url(#glowGradient)" />
     <!-- camadas de nuvem passando em velocidades diferentes (paralaxe) -->
     <g class="fx" fill="#FFFFFF">
@@ -513,12 +399,22 @@
       </g>
       <image class="tag" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAR0AAAATCAYAAACtF9m/AAAN20lEQVR4Ae3B7XmaCYIl0HMjGBxBQwQlRSCIwJoIBBFYjkAoAssRCEVgOwKoCKyKADoCMRHcfZ8VzxZW4Y/umekfvTonXv3LtB0l2Xv16v9j8epfou0l7nGeZOfV/9N2jjFWGGGc5LNX/5bi1b9M2zu8xXmSvVfazvEOf+AKe8ySPHr1byle/Uu1vcbnJDuv/q+2oyT7tiODJHuv/m3FQdsxrvE3jPAHNkk+O2g7wjU2STaOtB1jjs9JHh20HWOOEf4D/4Wv+D3Jzne0neISv3n2B+6S7JzQ9h0m+A/P/o5Nko0jbc9w6cfukuwN2l7izGl3SfZ+UdspprhLsvdPajtHkzx4oe21QZI7J7SdYopVkp1B20uMk9z5jrZzjHGXZO8H2o5xhTOMsMMmyYPvaDvHKMmdn2g7xSV+8+wP3CXZ+UVtL3HmtFWSnUHbKaZYJdk50vYSZ1gl2Rm0HeHaaY9JPnuh7RhXOMMIO2ySPDhoe4ZLrJLsHGk7xRR3SfYGbecY+75tkgcHbZd4TPLZoO0I19gk2Tih7RxN8uCFtnOMktx5IQZtx/jq2WfPzgySnDtoO8YWt0mWjrSdYo1FkpWDtnPc4xF7z6aeLZPceqHtPebYYYMRpp5dJ3nwQgfY49GzM4ywwX8m2Ru0vcQHfxpjj70/zZLsDNqucIWdv5ol2flFbb/iDLdJlv4JbadYe/Ymyd6Rtitc4U2SvRfarjFOMnHQdoWLJBPf0XaLMeZJHnxH23e4wx6fPRtjikmSnRfajrH1bJZk4zva3mCJPT5jhDOMsUxy6xe0XeEKO3+1SLIxaDvCFo9JZg7ajvEVn5MsHLQdY4s99r71Jcm1I23f4Q57fPZsjCkmSXYGbee4xyzJxpG2S9xgkmRn0HaFC89GGGHnT49J/tNBB1glWTho+4THJDMvtB1ji1WShSNtx9h6NkuycSQGbVd4i/MkO9/RdowtbpMsHWk7xRqLJCsHbee4xyTJzqDtGJ9whjdJ9g7a3mCJ2yRLB23H+IQznCd5dKQDrJIsHLS9xgfcJlk6oe0WmyQLJ7Rd4SoD/w1tp1hjgzNMkuz9g9qucIERPiZZOtJ2ijXeJ7lzpO0YW3xMcu2g7QoXSSZOaDvHPR6xTzJzQttLfMJnLJLsHbQdJdk7oe0KFxjhMcnMCW1vsMRtkqWDtmPcY4pZko2faLvCVQZ+ou0lPuF9kjuDtmuMMUuyc9B2jC1ukyz9QNtLfMIDrpPsHbQdJdk7aDvHPWZJNo60XeIGkyQ7L7SdYo1Zko0TOsAqycJB2zu8wyTJzpG2c9xjlmTjSNsVLjDC5yQLR2LQdo1xkokfaDvGFrdJlo60nWKNRZKVg7Zz3GOSZOeg7SU+YZFkZdB2jC1WSRZeaDvGVzwmmTnSAVZJFo603WKXZOaEtltskiyc0HaFqwz8N7Rd4QLneMJtkqV/QNsxtpjjHFeYJNk70vYJj0lmjrS9xgdMkuwctF3hIsnECW232OABa8ySbLzQ9itGOE+y9wvajrHFHBPc4E2SvRfabrFLMvNC2xG2eEwy8xNtV7jKwC9o+wlTnOMt7jBP8uBI2zG2uE2y9ANtv2KE8yR7P9B2jnvMkmwcabvEDSZJdl5oO8UasyQbJ3SAVZKFg7ZTrHGbZOlI2zXGSSaOtB1jizkmuMGbJHsHMWi7xA2WeEiyc0LbMba4TbJ0pO0UayySrBy0neMekyQ7B22nWOMyyReDtpf4hMskX5zQdo2zJG8c6QCrJAtH2j7hMcnMCW232CRZOKHtClcZ+Ce1HWOLeZKHtmuMk0z8A9qucJFk0naKNd4nuXOk7RI3eJNk76DtV+yTzBxpu8JFkokX2k6xxnmSx7ZPeEwyc6TtCE9YJVn4RW3nuMcEezzhNsnSkbZTrDFP8uCEtitc4U2SvR9ou8JVBn5B2xG+Yo8RNkkWXmg7xha3SZa+o+0IT1glWfiJtnPcY5Zk40jbJW4wSbLzQtsp1pgl2TihA6ySLBxp+xX7JDMHbcfY4n2SO0faznGPCfZ4wm2SpYMYtB3hDleerXCbZOdI2zG2uE2ydKTtFGsskqwctJ3jHpMkO4O2Y3zCGSZJdgZtl7jBeZJHJ7S9wztMkuwcdIBVkoVB2zHe4RrzJA9OaLvFJsnCCW1XuMLOt74kufYL2i5xgzdJ9m2nWGOWZOMXtd1ik2Rh0HZtkGTmSNsp1rhNsjRoO8YW8yQPjrRd4SLJxAttV7hIMjFou8QN3iTZO2g7xRrvk9z5RW232CRZGLRd4yzJG0faznGPWZKNE9oucYNJkp0faLvCFXa+9SXJtRPaXuIT9jhPsvNC2zG22GPvW7MkO4O2U6zxPsmdn2g7xz1mSTaOtF3iBpMkOy+0nWKNWZKNEzrAKsnCkbZL3GCWZGPQdo57TJLsHGm7xSbJwqDtGmdJ3jiII22nmOMtRlgmuXXQdowtbpMsHWk7xRqLJCsHbee4x86fxtjjfZKVg7ZL3GCSZOeEtkvcYJJk56ADf7XHbZI739F2i02ShRParnCFhW/tkmz8grZbbJIsDNqOsMVjkplf0HaOe5wneTRoe40PmCXZONJ2jVGSc4O2K1zhTZK9I21XuEgycaTtGFvMkzwYtB1ji9skSwdtp1hjkWTlF7SdYo1Zko1B2ynWmCXZOGg7xz1mSTZOaLvEDc6TPPqBtitcYeFbuyQbJ7Rd4cqz90nuvNB2jC0+44tvfU6yN2g7xRqLJCs/0XaOe8ySbBxpu8QNJkl2Xmg7xRqzJBsndIBVkoUjbUd4wm2SpUHbLXZJZo60nWKNWZKNQdsp1pgl2RjECW3H+IQzzJJsDNqOscVtkqUjbadY4zLJFwdt57jHR+zxhL9jk2TvSNs57nGZ5IsT2n7CZQaOdIDfsfTs3rPzJHvf0XaLTZKFE9qucJWBf0LbKdZY4e/+9BZjTJLs/UTbNc7w0Z9GeIePSa4daXuND5gl2bTdYpNk4YW2K1wkmTjSdo57rPB3f3qHfZKJg7ZjbPExybVf0HaFK9z61g02SWYO2l7iExZJVk5ou8IV3iTZ+4G2K1xl4Be0neMe73GBKc6T7BxpO8YWt0mWvqPtGFt8THLtJ9rOcY9Zko0jbZe4wSTJzgttp1hjlmTjhA6wSrLwQts1zpK8aXuGr5gneXCk7QpXuPWnEd5hk2RmEN/R9gxfcZtkadB2hCd8THLtSNs57jFLsnHQdo57TJLs/EDbEZ6wSrLwQtsxvuIxycyRDrBKsjBoe4avuEvy3ne03WKTZOGEtitcZeCf0HaFt3j0V1O8T3LnB9qOscUOO98aY4RJkr2DtiNs8YBH3OM8yaMX2q5wkWTiSNstRnj0rRHOMEuycdD2ySDJGz/RdoQt9tj51hhjvEmyN2g7whaPSWZeaDvCV+yTnPuJtitcZeAn2o6xxi7JrO0IWzwmmTnSdowtbpMs/UDbJ4Mkb/xE2ynWWCRZOdJ2hasMnNB2ijVmSTZO6ACrJAsvtJ1ijRnmuEgycaTtCE/YYedbY4wwSbKP72h7iU+YJ3lw0HaNM5wn2Rm0HeGrQZKJI23nuMckyc5PtL3DO7xPcueg7Qj3uMR5kkdHOsAqycJB2yVuMEuycULbLTZJFk5ou8JVBv5BbUd4wirJwgttn/CYZOYH2l7jAyZJdo60vcQnXCb54kjbJd5hh32SmRParnCRZOKg7Rm+Yp7kwZG2IzzhY5JrB22v8QHLJLeOtB0l2TtoO8c9Zkk2jrSdYo33Se4ctF3iBsskt460vccc8yQPfqLtClcZ+Im2K1xhkmRn0HaOe7xPcueg7Rhb3CZZ+oG21/iAZZJbR9qOkuwdtB1hi8ckMwdtx1hjl2TmhLZTrDFLsnFCB1glWTih7RojnOF9kjtH2s5xj/Mkj460nWKN90nuYtD2K/b4A3v8DZfYY5Zk56DtGdbYY4P/wluM8T7JnSNt57jHJMnOT7Qd4ROm2OB3jHCFEW6TLL3QAVZJFo603RokmTih7RabJAsntF3hCht/9XuSpe9oO8c9Zkk2Xmi7xA1mSTa+o+0WuyQzL7QdYYvHJDNH2o7w5Nk8yYMT2q5wkWTioO0KV5gk2Xmh7RpnmCTZO2h7h3fY4Qv2+BsucZ5kZ9B2jXGSiRPaPuExycyRtnd4hw1+xwhvMcZtkqVf0HaFK2z81e9JlgZtz/AVt0mWjrRd4wyTJHuDtmNsscPOXy2S7By0vcM77PAFe/wNlzhPsnPQ9hofsMMXz648O0+yc0LbKdaYJdk4oQOskiyc0PYaHzybJNk50naNcZKJE9o+4THJLAZtL3GJv2GMPb7gLsneC23HWOI3jPCIj0k2Xmg7xRXeJ9n7RW3neIuxZ7/jc5KNE9reY5PkwZG2Z3iHhyQbL7S9w9ckD05oO8eF0zZJHnxH22v8lmThhLZneIeHJBsntB3jBl+SfHZC2zkukiy80PYavyVZ+I62c/yW5L2Dtkvsk9w5oe0UV3hIsnGk7RxvMcUej/gDd0n2Bm3vsUny4IS2c1zgNsnOkbZzvMUYI2zwkGTjF7Wd48JpmyQPBm2v8VuShRfanuEdHpJsDNqO8MH3vU+yd6TtHG8xxgiP+AN3SfaOtL3EFcYY4Qvukux8R9sxbvAxyaMT2t5jk+TBCW1H+IA/ktx5oe09viT57IS2c1zgfbx69b+g7RhbvE9y59Wrg3j16n9B2zneYpzk3KtXB/Hq1f+wtiMs8R/4mOTRq1cH/wfl8BWZczBIfAAAAABJRU5ErkJggg==" x="104.7" y="393.6" width="596.6" height="41.9" preserveAspectRatio="none" />
     </g>
+  
+      <ellipse class="cburst fx" cx="195" cy="343" rx="70" ry="70" fill="url(#cBurst)" />
+      <rect class="cflare fx" x="15" y="340" width="360" height="6" rx="3" fill="url(#cFlare)" />
+      <circle class="cring fx" cx="195" cy="352" r="40" fill="none" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="1.4" />
+      <line class="cscan fx" x1="45" y1="442" x2="62" y2="442" stroke="#FFC300" stroke-width="1.6" stroke-linecap="round" />
+    </g></g>
+    <rect class="vig fx" x="-200" y="-200" width="790" height="1180" fill="url(#cVig)" />
   </svg>
 
   <script>
     // Revisão: alternar protótipos e reiniciar a animação ao tocar na tela.
     const restart = () => {
-      document.querySelectorAll('.scene.active, .stars').forEach((el) => el.replaceWith(el.cloneNode(true)));
+      document.querySelectorAll('.scene.active, .stars').forEach((el) => {
+        if (el.tagName === 'IFRAME') { el.src = el.src; return; }
+        el.replaceWith(el.cloneNode(true));
+      });
     };
     document.querySelectorAll('.picker button').forEach((btn) => {
       btn.addEventListener('click', (e) => {
